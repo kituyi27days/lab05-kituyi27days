@@ -19,9 +19,15 @@ def main():
     args = parser.parse_args()
 
     # TODO: open args.filename and read it with csv.reader. The first row is the
+    with open(args.filename, "r") as f:
+        reader = csv.reader(f)
     #   header. Find the position of args.column within the header, then print every
+        header = next(reader)
     #   data row (its values joined by commas) whose value in that column equals
     #   args.value.
+        for row in reader:
+            if row[header.index(args.column)] == args.value:
+                print(",".join(row))
 
 
 if __name__ == "__main__":
